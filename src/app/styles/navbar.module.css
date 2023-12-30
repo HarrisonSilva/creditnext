@@ -7,7 +7,9 @@
     text-decoration: none;
     list-style: none;
     color: #fff;
+    font-size: 13px;
 }
+
 
 .container li {
    margin: 2px;
@@ -21,6 +23,6 @@
     display: flex;
     justify-content: center;
     flex-direction: column;
-    margin: 20px;
+    margin: auto auto auto 2vw;
     font-weight: bold;
 }

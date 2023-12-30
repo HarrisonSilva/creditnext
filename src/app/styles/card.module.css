@@ -123,3 +123,39 @@
     cursor: pointer;
     font-weight: bold;
 }
+
+.section {
+    height: 400px;
+    width: 30vw;
+    background-color: rgba(255, 255, 255, 0.825);
+    margin: 10vh auto auto auto;
+    border-radius: 10px;
+    box-shadow: 10px 10px 5px -8px rgba(0,0,0,0.75);
+}
+
+.bank {
+    color: black;
+    text-align: center;
+}
+
+.containerBank {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.containerBank div h4 p {
+    color: black;
+}
+
+.containerBank div {
+    margin-top: 5vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-left: 0.5vw;
+    margin-right: 0.5vw;
+    border-bottom: 1px solid black;
+}
