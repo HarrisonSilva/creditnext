@@ -56,6 +56,7 @@ const PaymentForm = () => {
     const newCards = [...cards, card]
     localStorage.setItem('cards', JSON.stringify(newCards));
     document.querySelector('#cardCreate').style.display = 'block'
+    window.location.reload();
   }
 
   
@@ -70,7 +71,7 @@ const PaymentForm = () => {
           <h1 className={styles.title}>Cadastre seu Cartão de Crédito</h1>
       </div>
       <div className={styles.container}>
-      <form method='post' className={styles.form}>
+      <form className={styles.form}>
       <div> 
        <h5 id='cardCreate' className={styles.sucess}>Cartao Gerado com Sucesso!</h5>
 
@@ -117,7 +118,7 @@ const PaymentForm = () => {
               />
             
       </div>
-        <button disabled={btndisabled} type='submit' onClick={ createCard }>
+        <button disabled={btndisabled} type='button' onClick={ createCard }>
           Cadastre
         </button>
       </form>
