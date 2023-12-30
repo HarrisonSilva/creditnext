@@ -6,29 +6,24 @@ import 'react-credit-cards-2/dist/es/styles-compiled.css';
 import Footer from '../components/Footer';
 
 export default function page() {
-    const storedCards = JSON.parse(localStorage.getItem('cards'));
-
+    const isLocalStorageAvailable = typeof localStorage !== 'undefined';
+    let storedCards;
+if (isLocalStorageAvailable) {
+  storedCards = JSON.parse(localStorage.getItem('cards'));
+  
+}
     const deleteCard = (event) => {
         const nameCard = event.target.parentNode.firstChild.firstChild.firstChild.children[4].innerText;
     
-        // Encontrar o índice do cartão com o nome correspondente
         const indexOfCard = storedCards.findIndex((card) => card.name.toUpperCase() === nameCard);
-    
-        // Exibir informações no console para depuração
-        console.log('Nome do Cartão:', nameCard);
-        console.log('Índice do Cartão:', indexOfCard);
-    
-        // Remover o cartão do array e atualizar o localStorage
+        
         if (indexOfCard !== -1) {
             storedCards.splice(indexOfCard, 1);
-    
-            // Atualizar o localStorage com o novo array
             localStorage.setItem('cards', JSON.stringify(storedCards));
             window.location.reload();
         }
     }
     
-
   return (
     <div>
         <header className={styles.header}>
