@@ -1,95 +1,137 @@
+"use client"
+import React, { useEffect, useState } from 'react';
+import Cards from 'react-credit-cards-2';
+import 'react-credit-cards-2/dist/es/styles-compiled.css';
+import styles from './styles/card.module.css'
 import Image from 'next/image'
-import styles from './page.module.css'
+import Footer from './components/Footer';
 
-export default function Home() {
+const PaymentForm = () => {
+  const [cards, setCards] = useState([])
+  const [btndisabled, setBtnDisabled] = useState(true)
+  const [card , setCard] = useState({
+    number: '',
+    expiry: '',
+    cvc: '',
+    name: '',
+    focus: '',
+  });
+
+  const handleInputChange = (evt) => {
+    const { name, value } = evt.target;  
+    setCard((prev) => ({ 
+      ...prev,
+       [name]: value 
+      }));
+  }
+
+  useEffect(() => {
+    const { number, expiry, cvc, name } = card
+    const validate = number.length === 16 && expiry.length === 4 && cvc.length === 3 && name.length > 6 && typeof name === 'string'
+    if (validate) {
+      const btn = document.querySelector('button').style
+      btn.backgroundColor = '#1A9C22';
+      btn.color = '#fff';
+      btn.cursor = 'pointer'
+    }
+    if (!validate) {
+      const btn = document.querySelector('button').style
+      btn.backgroundColor = '#ffffff';
+      btn.color = '#686868';
+      btn.cursor = 'default'
+    }
+    const storedCards = JSON.parse(localStorage.getItem('cards')) || []
+    setCards(storedCards)
+    setBtnDisabled(!validate);
+  }, [card]);  
+    
+  const handleInputFocus = (evt) => {
+    setCard((prev) => ({ 
+      ...prev,
+       focus: evt.target.name 
+      }));
+  }
+
+  const createCard = () => {
+    const newCards = [...cards, card]
+    localStorage.setItem('cards', JSON.stringify(newCards));
+    document.querySelector('#cardCreate').style.display = 'block'
+  }
+
+  
   return (
-    <main className={styles.main}>
-      <div className={styles.description}>
-        <p>
-          Get started by editing&nbsp;
-          <code className={styles.code}>src/app/page.js</code>
-        </p>
-        <div>
-          <a
-            href="https://vercel.com?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            By{' '}
-            <Image
-              src="/vercel.svg"
-              alt="Vercel Logo"
-              className={styles.vercelLogo}
-              width={100}
-              height={24}
-              priority
-            />
-          </a>
+    <div>
+      <div className={styles.header}>
+          <div className={styles.containerImg}>
+            
+              <h3 className={styles.sub}>CreditNext</h3>
+              <Image src='/creditcard.png' width='50' height='50' alt='photo card'/>
+          </div>
+          <h1 className={styles.title}>Cadastre seu Cartão de Crédito</h1>
+      </div>
+      <div className={styles.container}>
+      <form method='post' className={styles.form}>
+      <div> 
+       <h5 id='cardCreate' className={styles.sucess}>Cartao Gerado com Sucesso!</h5>
+
+       <h4>Digite seu nome</h4>
+            <input
+              type="text"
+              name="name"
+              value={card.name}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              />
+
+      </div>
+      <div>
+      <h4>Digite o número</h4>
+      <input
+              type="number"
+              name="number"
+              value={card.number}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              />
+            
+      </div>
+      <div>
+      <h4>Digite o código de verificação</h4>
+      <input
+              type="number"
+              name="cvc"
+              value={card.cvc}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              />
+         
+      </div>
+      <div>
+      <h4>Digite a data de validade</h4>
+      <input
+              type="number"
+              name="expiry"
+              value={card.expiry}
+              onChange={handleInputChange}
+              onFocus={handleInputFocus}
+              />
+            
+      </div>
+        <button disabled={btndisabled} type='submit' onClick={ createCard }>
+          Cadastre
+        </button>
+      </form>
+      <Cards
+        number={card.number}
+        expiry={card.expiry}
+        cvc={card.cvc}
+        name={card.name}
+        focused={card.focus}
+      />
+     </div>
+          <Footer />
         </div>
-      </div>
-
-      <div className={styles.center}>
-        <Image
-          className={styles.logo}
-          src="/next.svg"
-          alt="Next.js Logo"
-          width={180}
-          height={37}
-          priority
-        />
-      </div>
-
-      <div className={styles.grid}>
-        <a
-          href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Docs <span>-&gt;</span>
-          </h2>
-          <p>Find in-depth information about Next.js features and API.</p>
-        </a>
-
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Learn <span>-&gt;</span>
-          </h2>
-          <p>Learn about Next.js in an interactive course with&nbsp;quizzes!</p>
-        </a>
-
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Templates <span>-&gt;</span>
-          </h2>
-          <p>Explore starter templates for Next.js.</p>
-        </a>
-
-        <a
-          href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          className={styles.card}
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <h2>
-            Deploy <span>-&gt;</span>
-          </h2>
-          <p>
-            Instantly deploy your Next.js site to a shareable URL with Vercel.
-          </p>
-        </a>
-      </div>
-    </main>
-  )
+  );
 }
+
+export default PaymentForm;

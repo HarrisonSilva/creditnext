@@ -1,0 +1,26 @@
+.nav {
+    position: absolute;
+    color: #fff;
+    text-decoration: none;
+}
+.container li a {
+    text-decoration: none;
+    list-style: none;
+    color: #fff;
+}
+
+.container li {
+   margin: 2px;
+}
+
+.container li a:hover {
+   border-bottom: 2px solid white;
+}
+
+.container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 20px;
+    font-weight: bold;
+}
