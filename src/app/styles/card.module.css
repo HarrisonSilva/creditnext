@@ -8,6 +8,7 @@
     margin: auto;
 }
 
+
 .containerCard div {
     margin: 5px;
 }
@@ -30,6 +31,7 @@
     box-shadow: 1px 3px 10px 0px rgba(0,0,0,0.75);
 }
 
+
 .containerImg {
     margin-left: 40vh;
     display: flex;
@@ -48,6 +50,7 @@
         margin-top: 15vh;
     }
 
+   
 .form {
     display: flex;
     justify-content: center;
@@ -84,6 +87,8 @@
     color: #fff;
     font-size: 15px;
 }
+
+
 
 .form button {
     background-color: #ffffff;
@@ -158,4 +163,54 @@
     margin-left: 0.5vw;
     margin-right: 0.5vw;
     border-bottom: 1px solid black;
+}
+
+
+@media (max-width: 775px) {
+    .title {
+        display: none;
+    }
+    .containerImg {
+       margin: 50vw;
+    }
+    .container {
+        flex-direction: column;
+        margin: 15px;
+    }
+    .form {
+        order: 1;
+        width: 290px;
+        height: 48vh;
+        margin: 10px;
+    }
+    .form input {
+        width: 200px;
+        padding: 0;
+    }
+    .form h4 {
+        font-size: 12px;
+    }
+    .myCardsTitle {
+        font-size: 20px;
+        margin: auto auto auto 50vw;
+    }
+
+    .containerCards {
+        width: 100vw;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
+    }
+    .myCardsTitle {
+        margin: auto auto auto 40vw;
+        font-size: 18px;
+    }
+    .section {
+        width: 80vw;
+        height: 210px;
+    }
+    .containerBank div {
+        margin: 10px;
+    }
 }
